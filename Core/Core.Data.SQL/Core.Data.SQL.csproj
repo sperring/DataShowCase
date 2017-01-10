@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F54713DF-666A-4E4D-9F2C-C51A3D1ABCFD}</ProjectGuid>
+    <ProjectGuid>{E1ABBBC4-CD2B-476F-8B96-DB3B89958BFE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
+    <RootNamespace>Core.Data.SQL</RootNamespace>
+    <AssemblyName>Core.Data.SQL</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,20 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseResponse.cs" />
-    <Compile Include="BaseRequest.cs" />
-    <Compile Include="DBContext.cs" />
-    <Compile Include="IDbManager.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="ILogger.cs" />
-    <Compile Include="IMessagingClient.cs" />
-    <Compile Include="IRequest.cs" />
+    <Compile Include="SqlDbManager.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="DataHelpers.cs" />
+    <Compile Include="DatabaseLogger.cs" />
+    <Compile Include="DapperSQLRepositoryFactory.cs" />
+    <Compile Include="DapperSQLRepository.cs" />
+    <Compile Include="IDapperSQLRepositoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{b9764e99-11a0-43ee-bcf5-6a80b17570a4}</Project>
-      <Name>Core.Common</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Logging\Core.Logging.csproj">
+      <Project>{7282cbc0-e770-4a80-9da1-c1f43c7593e4}</Project>
+      <Name>Core.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{F54713DF-666A-4E4D-9F2C-C51A3D1ABCFD}</Project>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
