@@ -30,7 +30,7 @@ namespace Core.Messaging
             var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
             var requestedHeartbeat = ConfigurationManager.AppSettings["RabbitMQRequestedHeartbeat"];
             var prefetchCount = ConfigurationManager.AppSettings["RabbitMQPreFetchCount"];
-            var connectionString = String.Format("host={0}", hostName);
+            var connectionString = String.Format("host={0};requestedHeartbeat={3};prefetchcount={4}", hostName, requestedHeartbeat, prefetchCount);
             if (!String.IsNullOrEmpty(userName))
             {
                 connectionString = String.Format("host={0};username={1};password={2};requestedHeartbeat={3};prefetchcount={4}", hostName, userName, password, requestedHeartbeat, prefetchCount);
@@ -112,7 +112,7 @@ namespace Core.Messaging
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             ContractResolver = new DefaultContractResolver
             {
-                DefaultMembersSearchFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                //DefaultMembersSearchFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
             },
             TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
             TypeNameHandling = TypeNameHandling.All,
